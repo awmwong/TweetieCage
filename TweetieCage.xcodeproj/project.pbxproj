@@ -1,0 +1,291 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9278CF62141FEA5700B70414 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9278CF61141FEA5700B70414 /* UIKit.framework */; };
+		9278CF64141FEA5700B70414 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9278CF63141FEA5700B70414 /* Foundation.framework */; };
+		9278CF66141FEA5700B70414 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9278CF65141FEA5700B70414 /* CoreGraphics.framework */; };
+		9278CF68141FEA5700B70414 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9278CF67141FEA5700B70414 /* CoreData.framework */; };
+		9278CF6E141FEA5700B70414 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9278CF6C141FEA5700B70414 /* InfoPlist.strings */; };
+		9278CF70141FEA5700B70414 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9278CF6F141FEA5700B70414 /* main.m */; };
+		9278CF74141FEA5700B70414 /* TweetieCageAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9278CF73141FEA5700B70414 /* TweetieCageAppDelegate.m */; };
+		9278CF77141FEA5700B70414 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9278CF75141FEA5700B70414 /* MainWindow.xib */; };
+		9278CF7A141FEA5700B70414 /* TweetieCage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9278CF78141FEA5700B70414 /* TweetieCage.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9278CF5D141FEA5700B70414 /* TweetieCage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TweetieCage.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9278CF61141FEA5700B70414 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9278CF63141FEA5700B70414 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9278CF65141FEA5700B70414 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9278CF67141FEA5700B70414 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9278CF6B141FEA5700B70414 /* TweetieCage-Info.plist */ = {isa = PBXFileReference; path = "TweetieCage-Info.plist"; sourceTree = "<group>"; };
+		9278CF6D141FEA5700B70414 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9278CF6F141FEA5700B70414 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9278CF71141FEA5700B70414 /* TweetieCage-Prefix.pch */ = {isa = PBXFileReference; path = "TweetieCage-Prefix.pch"; sourceTree = "<group>"; };
+		9278CF72141FEA5700B70414 /* TweetieCageAppDelegate.h */ = {isa = PBXFileReference; path = TweetieCageAppDelegate.h; sourceTree = "<group>"; };
+		9278CF73141FEA5700B70414 /* TweetieCageAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetieCageAppDelegate.m; sourceTree = "<group>"; };
+		9278CF76141FEA5700B70414 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		9278CF79141FEA5700B70414 /* TweetieCage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TweetieCage.xcdatamodel; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9278CF5A141FEA5700B70414 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9278CF62141FEA5700B70414 /* UIKit.framework in Frameworks */,
+				9278CF64141FEA5700B70414 /* Foundation.framework in Frameworks */,
+				9278CF66141FEA5700B70414 /* CoreGraphics.framework in Frameworks */,
+				9278CF68141FEA5700B70414 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9278CF52141FEA5700B70414 = {
+			isa = PBXGroup;
+			children = (
+				9278CF69141FEA5700B70414 /* TweetieCage */,
+				9278CF60141FEA5700B70414 /* Frameworks */,
+				9278CF5E141FEA5700B70414 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9278CF5E141FEA5700B70414 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9278CF5D141FEA5700B70414 /* TweetieCage.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9278CF60141FEA5700B70414 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9278CF61141FEA5700B70414 /* UIKit.framework */,
+				9278CF63141FEA5700B70414 /* Foundation.framework */,
+				9278CF65141FEA5700B70414 /* CoreGraphics.framework */,
+				9278CF67141FEA5700B70414 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9278CF69141FEA5700B70414 /* TweetieCage */ = {
+			isa = PBXGroup;
+			children = (
+				9278CF72141FEA5700B70414 /* TweetieCageAppDelegate.h */,
+				9278CF73141FEA5700B70414 /* TweetieCageAppDelegate.m */,
+				9278CF75141FEA5700B70414 /* MainWindow.xib */,
+				9278CF78141FEA5700B70414 /* TweetieCage.xcdatamodeld */,
+				9278CF6A141FEA5700B70414 /* Supporting Files */,
+			);
+			path = TweetieCage;
+			sourceTree = "<group>";
+		};
+		9278CF6A141FEA5700B70414 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9278CF6B141FEA5700B70414 /* TweetieCage-Info.plist */,
+				9278CF6C141FEA5700B70414 /* InfoPlist.strings */,
+				9278CF6F141FEA5700B70414 /* main.m */,
+				9278CF71141FEA5700B70414 /* TweetieCage-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9278CF5C141FEA5700B70414 /* TweetieCage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9278CF7D141FEA5700B70414 /* Build configuration list for PBXNativeTarget "TweetieCage" */;
+			buildPhases = (
+				9278CF59141FEA5700B70414 /* Sources */,
+				9278CF5A141FEA5700B70414 /* Frameworks */,
+				9278CF5B141FEA5700B70414 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TweetieCage;
+			productName = TweetieCage;
+			productReference = 9278CF5D141FEA5700B70414 /* TweetieCage.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9278CF54141FEA5700B70414 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 9278CF57141FEA5700B70414 /* Build configuration list for PBXProject "TweetieCage" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9278CF52141FEA5700B70414;
+			productRefGroup = 9278CF5E141FEA5700B70414 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9278CF5C141FEA5700B70414 /* TweetieCage */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9278CF5B141FEA5700B70414 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9278CF6E141FEA5700B70414 /* InfoPlist.strings in Resources */,
+				9278CF77141FEA5700B70414 /* MainWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9278CF59141FEA5700B70414 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9278CF70141FEA5700B70414 /* main.m in Sources */,
+				9278CF74141FEA5700B70414 /* TweetieCageAppDelegate.m in Sources */,
+				9278CF7A141FEA5700B70414 /* TweetieCage.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9278CF6C141FEA5700B70414 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9278CF6D141FEA5700B70414 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9278CF75141FEA5700B70414 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9278CF76141FEA5700B70414 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9278CF7B141FEA5700B70414 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9278CF7C141FEA5700B70414 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9278CF7E141FEA5700B70414 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TweetieCage/TweetieCage-Prefix.pch";
+				INFOPLIST_FILE = "TweetieCage/TweetieCage-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9278CF7F141FEA5700B70414 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TweetieCage/TweetieCage-Prefix.pch";
+				INFOPLIST_FILE = "TweetieCage/TweetieCage-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9278CF57141FEA5700B70414 /* Build configuration list for PBXProject "TweetieCage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9278CF7B141FEA5700B70414 /* Debug */,
+				9278CF7C141FEA5700B70414 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9278CF7D141FEA5700B70414 /* Build configuration list for PBXNativeTarget "TweetieCage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9278CF7E141FEA5700B70414 /* Debug */,
+				9278CF7F141FEA5700B70414 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9278CF78141FEA5700B70414 /* TweetieCage.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9278CF79141FEA5700B70414 /* TweetieCage.xcdatamodel */,
+			);
+			currentVersion = 9278CF79141FEA5700B70414 /* TweetieCage.xcdatamodel */;
+			path = TweetieCage.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 9278CF54141FEA5700B70414 /* Project object */;
+}
