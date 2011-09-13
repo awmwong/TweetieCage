@@ -10,7 +10,7 @@
 
 @implementation TweetieCageAppDelegate
 
-@synthesize window = _window;
+@synthesize window;
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
@@ -18,6 +18,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -60,7 +61,6 @@
 
 - (void)dealloc
 {
-    [_window release];
     [__managedObjectContext release];
     [__managedObjectModel release];
     [__persistentStoreCoordinator release];

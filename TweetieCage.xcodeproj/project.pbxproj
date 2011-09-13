@@ -14,7 +14,6 @@
 		9278CF6E141FEA5700B70414 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9278CF6C141FEA5700B70414 /* InfoPlist.strings */; };
 		9278CF70141FEA5700B70414 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9278CF6F141FEA5700B70414 /* main.m */; };
 		9278CF74141FEA5700B70414 /* TweetieCageAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9278CF73141FEA5700B70414 /* TweetieCageAppDelegate.m */; };
-		9278CF77141FEA5700B70414 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9278CF75141FEA5700B70414 /* MainWindow.xib */; };
 		9278CF7A141FEA5700B70414 /* TweetieCage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9278CF78141FEA5700B70414 /* TweetieCage.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +29,6 @@
 		9278CF71141FEA5700B70414 /* TweetieCage-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TweetieCage-Prefix.pch"; sourceTree = "<group>"; };
 		9278CF72141FEA5700B70414 /* TweetieCageAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TweetieCageAppDelegate.h; sourceTree = "<group>"; };
 		9278CF73141FEA5700B70414 /* TweetieCageAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetieCageAppDelegate.m; sourceTree = "<group>"; };
-		9278CF76141FEA5700B70414 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		9278CF79141FEA5700B70414 /* TweetieCage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TweetieCage.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,7 +80,6 @@
 			children = (
 				9278CF72141FEA5700B70414 /* TweetieCageAppDelegate.h */,
 				9278CF73141FEA5700B70414 /* TweetieCageAppDelegate.m */,
-				9278CF75141FEA5700B70414 /* MainWindow.xib */,
 				9278CF78141FEA5700B70414 /* TweetieCage.xcdatamodeld */,
 				9278CF6A141FEA5700B70414 /* Supporting Files */,
 			);
@@ -148,7 +145,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9278CF6E141FEA5700B70414 /* InfoPlist.strings in Resources */,
-				9278CF77141FEA5700B70414 /* MainWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,14 +170,6 @@
 				9278CF6D141FEA5700B70414 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		9278CF75141FEA5700B70414 /* MainWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9278CF76141FEA5700B70414 /* en */,
-			);
-			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
