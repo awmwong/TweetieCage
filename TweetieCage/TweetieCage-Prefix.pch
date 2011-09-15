@@ -12,4 +12,6 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
+/// put magical record
+/// 3rd party
 #endif
