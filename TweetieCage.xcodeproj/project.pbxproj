@@ -18,7 +18,6 @@
 		9278CF821420E71400B70414 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9278CF811420E71400B70414 /* Tweet.m */; };
 		92A68C1C14211678005740D7 /* TCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A68C1B14211678005740D7 /* TCTableViewController.m */; };
 		92E68CC81422720F000A4569 /* YAJLiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E68CC71422720F000A4569 /* YAJLiOS.framework */; };
-		92E68CCB142272A0000A4569 /* YAJLiOS.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 92E68CC71422720F000A4569 /* YAJLiOS.framework */; };
 		92E68D2D14228913000A4569 /* ActiveRecordHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D1F14228913000A4569 /* ActiveRecordHelpers.m */; };
 		92E68D2E14228913000A4569 /* ARCoreDataAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D2114228913000A4569 /* ARCoreDataAction.m */; };
 		92E68D2F14228913000A4569 /* NSManagedObject+ActiveRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D2414228913000A4569 /* NSManagedObject+ActiveRecord.m */; };
@@ -27,19 +26,6 @@
 		92E68D3214228913000A4569 /* NSPersistentStore+ActiveRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D2A14228913000A4569 /* NSPersistentStore+ActiveRecord.m */; };
 		92E68D3314228913000A4569 /* NSPersistentStoreCoordinator+ActiveRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D2C14228913000A4569 /* NSPersistentStoreCoordinator+ActiveRecord.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		92E68CCA14227292000A4569 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				92E68CCB142272A0000A4569 /* YAJLiOS.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9278CF5D141FEA5700B70414 /* TweetieCage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TweetieCage.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,7 +182,6 @@
 				9278CF59141FEA5700B70414 /* Sources */,
 				9278CF5A141FEA5700B70414 /* Frameworks */,
 				9278CF5B141FEA5700B70414 /* Resources */,
-				92E68CCA14227292000A4569 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -332,6 +317,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TweetieCage/TweetieCage-Prefix.pch";
 				INFOPLIST_FILE = "TweetieCage/TweetieCage-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -347,6 +337,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TweetieCage/TweetieCage-Prefix.pch";
 				INFOPLIST_FILE = "TweetieCage/TweetieCage-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
