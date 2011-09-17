@@ -18,21 +18,14 @@
 		9278CF821420E71400B70414 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9278CF811420E71400B70414 /* Tweet.m */; };
 		92A68C1C14211678005740D7 /* TCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A68C1B14211678005740D7 /* TCTableViewController.m */; };
 		92E68CC81422720F000A4569 /* YAJLiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E68CC71422720F000A4569 /* YAJLiOS.framework */; };
-		92E68CCB142272A0000A4569 /* YAJLiOS.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 92E68CC71422720F000A4569 /* YAJLiOS.framework */; };
+		92E68D2D14228913000A4569 /* ActiveRecordHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D1F14228913000A4569 /* ActiveRecordHelpers.m */; };
+		92E68D2E14228913000A4569 /* ARCoreDataAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D2114228913000A4569 /* ARCoreDataAction.m */; };
+		92E68D2F14228913000A4569 /* NSManagedObject+ActiveRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D2414228913000A4569 /* NSManagedObject+ActiveRecord.m */; };
+		92E68D3014228913000A4569 /* NSManagedObjectContext+ActiveRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D2614228913000A4569 /* NSManagedObjectContext+ActiveRecord.m */; };
+		92E68D3114228913000A4569 /* NSManagedObjectModel+ActiveRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D2814228913000A4569 /* NSManagedObjectModel+ActiveRecord.m */; };
+		92E68D3214228913000A4569 /* NSPersistentStore+ActiveRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D2A14228913000A4569 /* NSPersistentStore+ActiveRecord.m */; };
+		92E68D3314228913000A4569 /* NSPersistentStoreCoordinator+ActiveRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D2C14228913000A4569 /* NSPersistentStoreCoordinator+ActiveRecord.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		92E68CCA14227292000A4569 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				92E68CCB142272A0000A4569 /* YAJLiOS.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9278CF5D141FEA5700B70414 /* TweetieCage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TweetieCage.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +45,21 @@
 		92A68C1A14211678005740D7 /* TCTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCTableViewController.h; sourceTree = "<group>"; };
 		92A68C1B14211678005740D7 /* TCTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCTableViewController.m; sourceTree = "<group>"; };
 		92E68CC71422720F000A4569 /* YAJLiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJLiOS.framework; path = Frameworks/YAJLiOS.framework; sourceTree = "<group>"; };
+		92E68D1E14228913000A4569 /* ActiveRecordHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveRecordHelpers.h; sourceTree = "<group>"; };
+		92E68D1F14228913000A4569 /* ActiveRecordHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveRecordHelpers.m; sourceTree = "<group>"; };
+		92E68D2014228913000A4569 /* ARCoreDataAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCoreDataAction.h; sourceTree = "<group>"; };
+		92E68D2114228913000A4569 /* ARCoreDataAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCoreDataAction.m; sourceTree = "<group>"; };
+		92E68D2214228913000A4569 /* CoreData+ActiveRecordFetching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreData+ActiveRecordFetching.h"; sourceTree = "<group>"; };
+		92E68D2314228913000A4569 /* NSManagedObject+ActiveRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+ActiveRecord.h"; sourceTree = "<group>"; };
+		92E68D2414228913000A4569 /* NSManagedObject+ActiveRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+ActiveRecord.m"; sourceTree = "<group>"; };
+		92E68D2514228913000A4569 /* NSManagedObjectContext+ActiveRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+ActiveRecord.h"; sourceTree = "<group>"; };
+		92E68D2614228913000A4569 /* NSManagedObjectContext+ActiveRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+ActiveRecord.m"; sourceTree = "<group>"; };
+		92E68D2714228913000A4569 /* NSManagedObjectModel+ActiveRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectModel+ActiveRecord.h"; sourceTree = "<group>"; };
+		92E68D2814228913000A4569 /* NSManagedObjectModel+ActiveRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectModel+ActiveRecord.m"; sourceTree = "<group>"; };
+		92E68D2914228913000A4569 /* NSPersistentStore+ActiveRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPersistentStore+ActiveRecord.h"; sourceTree = "<group>"; };
+		92E68D2A14228913000A4569 /* NSPersistentStore+ActiveRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPersistentStore+ActiveRecord.m"; sourceTree = "<group>"; };
+		92E68D2B14228913000A4569 /* NSPersistentStoreCoordinator+ActiveRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPersistentStoreCoordinator+ActiveRecord.h"; sourceTree = "<group>"; };
+		92E68D2C14228913000A4569 /* NSPersistentStoreCoordinator+ActiveRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPersistentStoreCoordinator+ActiveRecord.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +110,7 @@
 		9278CF69141FEA5700B70414 /* TweetieCage */ = {
 			isa = PBXGroup;
 			children = (
+				92E68CCC142285B0000A4569 /* Libraries */,
 				9278CF72141FEA5700B70414 /* TweetieCageAppDelegate.h */,
 				9278CF73141FEA5700B70414 /* TweetieCageAppDelegate.m */,
 				9278CF78141FEA5700B70414 /* TweetieCage.xcdatamodeld */,
@@ -133,6 +142,36 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		92E68CCC142285B0000A4569 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				92E68CE814228635000A4569 /* magicalrecord */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		92E68CE814228635000A4569 /* magicalrecord */ = {
+			isa = PBXGroup;
+			children = (
+				92E68D1E14228913000A4569 /* ActiveRecordHelpers.h */,
+				92E68D1F14228913000A4569 /* ActiveRecordHelpers.m */,
+				92E68D2014228913000A4569 /* ARCoreDataAction.h */,
+				92E68D2114228913000A4569 /* ARCoreDataAction.m */,
+				92E68D2214228913000A4569 /* CoreData+ActiveRecordFetching.h */,
+				92E68D2314228913000A4569 /* NSManagedObject+ActiveRecord.h */,
+				92E68D2414228913000A4569 /* NSManagedObject+ActiveRecord.m */,
+				92E68D2514228913000A4569 /* NSManagedObjectContext+ActiveRecord.h */,
+				92E68D2614228913000A4569 /* NSManagedObjectContext+ActiveRecord.m */,
+				92E68D2714228913000A4569 /* NSManagedObjectModel+ActiveRecord.h */,
+				92E68D2814228913000A4569 /* NSManagedObjectModel+ActiveRecord.m */,
+				92E68D2914228913000A4569 /* NSPersistentStore+ActiveRecord.h */,
+				92E68D2A14228913000A4569 /* NSPersistentStore+ActiveRecord.m */,
+				92E68D2B14228913000A4569 /* NSPersistentStoreCoordinator+ActiveRecord.h */,
+				92E68D2C14228913000A4569 /* NSPersistentStoreCoordinator+ActiveRecord.m */,
+			);
+			name = magicalrecord;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,7 +182,6 @@
 				9278CF59141FEA5700B70414 /* Sources */,
 				9278CF5A141FEA5700B70414 /* Frameworks */,
 				9278CF5B141FEA5700B70414 /* Resources */,
-				92E68CCA14227292000A4569 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -200,6 +238,13 @@
 				9278CF7A141FEA5700B70414 /* TweetieCage.xcdatamodeld in Sources */,
 				9278CF821420E71400B70414 /* Tweet.m in Sources */,
 				92A68C1C14211678005740D7 /* TCTableViewController.m in Sources */,
+				92E68D2D14228913000A4569 /* ActiveRecordHelpers.m in Sources */,
+				92E68D2E14228913000A4569 /* ARCoreDataAction.m in Sources */,
+				92E68D2F14228913000A4569 /* NSManagedObject+ActiveRecord.m in Sources */,
+				92E68D3014228913000A4569 /* NSManagedObjectContext+ActiveRecord.m in Sources */,
+				92E68D3114228913000A4569 /* NSManagedObjectModel+ActiveRecord.m in Sources */,
+				92E68D3214228913000A4569 /* NSPersistentStore+ActiveRecord.m in Sources */,
+				92E68D3314228913000A4569 /* NSPersistentStoreCoordinator+ActiveRecord.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +317,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TweetieCage/TweetieCage-Prefix.pch";
 				INFOPLIST_FILE = "TweetieCage/TweetieCage-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -287,6 +337,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TweetieCage/TweetieCage-Prefix.pch";
 				INFOPLIST_FILE = "TweetieCage/TweetieCage-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
