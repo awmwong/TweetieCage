@@ -9,12 +9,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TweetieCage/TweetieCageAppDelegate.m"
-         timestampString = "337814692.546401"
+         timestampString = "337892050.514633"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "42"
-         endingLineNumber = "42"
-         landmarkName = "-getDataFromTwitter"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
+         landmarkName = "-displayData"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

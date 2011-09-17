@@ -7,11 +7,13 @@
 //
 
 #import "TweetieCageAppDelegate.h"
+#import "Tweet.h"
 #import <YAJLiOS/YAJL.h>
 
 @interface TweetieCageAppDelegate (private)
     // forward declarations for helpers
--(NSArray*)getDataFromTwitter;
+-(void)getDataFromTwitter;
+-(void)displayData;
 @end
 
 @implementation TweetieCageAppDelegate
@@ -20,26 +22,52 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
+    [ActiveRecordHelpers setupCoreDataStack];
+
     // Override point for customization after application launch.
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     tableViewController = [[[TCTableViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
-    [self getDataFromTwitter];
+    //[self getDataFromTwitter];
+    [self displayData];
     [window setRootViewController:tableViewController];
-    
     [window makeKeyAndVisible];
     return YES;
 }
 
-- (NSArray*) getDataFromTwitter
+- (void) getDataFromTwitter
 {
     NSURL *url = [NSURL URLWithString:@"http://search.twitter.com/search.json?q=anthowong&rpp=100"];
     NSData *twitterResponse = [NSData dataWithContentsOfURL:url];
-    //NSData *twitterResponse = [[NSData dataWithContentsOfFile:@"/Users/Anthony/Desktop/example.json"] autorelease];
-    NSArray *arrayFromData = [twitterResponse yajl_JSON];
-    NSDictionary *responseDict = (NSDictionary*)arrayFromData;
-    return arrayFromData;
+    NSDictionary *responseDict = (NSDictionary*) [twitterResponse yajl_JSON];
+    NSArray *resultsArray = [responseDict objectForKey:@"results"];
+    NSMutableArray *tweetsArray = [NSMutableArray array];
+    NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
+    
+    //Dateformatter: Fri, 16 Sep 2011 01:23:45 +0000
+    NSDateFormatter *df = [[[NSDateFormatter alloc] init] autorelease];
+    [df setTimeStyle:NSDateFormatterFullStyle];
+    [df setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [df setDateFormat:@"EEE, d LLL yyyy HH:mm:ss Z"];
+
+    for (id object in resultsArray){
+        Tweet *aTweet = [Tweet createEntity];
+    
+        aTweet.name = [object objectForKey:@"from_user"];
+        aTweet.imgurl = [object objectForKey:@"profile_image_url"];
+        aTweet.date = [df dateFromString:[object objectForKey:@"created_at"]];
+        aTweet.text = [object objectForKey:@"text"];
+        
+        [tweetsArray addObject:aTweet];
+    }
+    
+    [context save];
+}
+
+- (void) displayData
+{
+    NSArray *tweetsArray = [Tweet findAll];
+    
     
 }
 

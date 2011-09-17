@@ -10,5 +10,7 @@
 
 @interface TCTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 {
+    NSFetchedResultsController *resultsController;
 }
+@property (nonatomic, retain) NSFetchedResultsController *resultsController;
 @end
