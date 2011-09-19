@@ -3,7 +3,7 @@
 //  TweetieCage
 //
 //  Created by Anthony Wong on 11-09-13.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

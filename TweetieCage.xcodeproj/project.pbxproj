@@ -25,6 +25,8 @@
 		92E68D3114228913000A4569 /* NSManagedObjectModel+ActiveRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D2814228913000A4569 /* NSManagedObjectModel+ActiveRecord.m */; };
 		92E68D3214228913000A4569 /* NSPersistentStore+ActiveRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D2A14228913000A4569 /* NSPersistentStore+ActiveRecord.m */; };
 		92E68D3314228913000A4569 /* NSPersistentStoreCoordinator+ActiveRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D2C14228913000A4569 /* NSPersistentStoreCoordinator+ActiveRecord.m */; };
+		92FAD2461427B24F00F43636 /* TCTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FAD2451427B24F00F43636 /* TCTableViewCell.m */; };
+		92FAD2491427D01800F43636 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FAD2481427D01700F43636 /* NSDate+Helper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +62,10 @@
 		92E68D2A14228913000A4569 /* NSPersistentStore+ActiveRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPersistentStore+ActiveRecord.m"; sourceTree = "<group>"; };
 		92E68D2B14228913000A4569 /* NSPersistentStoreCoordinator+ActiveRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPersistentStoreCoordinator+ActiveRecord.h"; sourceTree = "<group>"; };
 		92E68D2C14228913000A4569 /* NSPersistentStoreCoordinator+ActiveRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPersistentStoreCoordinator+ActiveRecord.m"; sourceTree = "<group>"; };
+		92FAD2441427B24F00F43636 /* TCTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCTableViewCell.h; sourceTree = "<group>"; };
+		92FAD2451427B24F00F43636 /* TCTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCTableViewCell.m; sourceTree = "<group>"; };
+		92FAD2471427D01700F43636 /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
+		92FAD2481427D01700F43636 /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,14 +116,18 @@
 		9278CF69141FEA5700B70414 /* TweetieCage */ = {
 			isa = PBXGroup;
 			children = (
+				92FAD2471427D01700F43636 /* NSDate+Helper.h */,
+				92FAD2481427D01700F43636 /* NSDate+Helper.m */,
+				9278CF6A141FEA5700B70414 /* Supporting Files */,
+				9278CF831420E72400B70414 /* Model */,
 				92E68CCC142285B0000A4569 /* Libraries */,
 				9278CF72141FEA5700B70414 /* TweetieCageAppDelegate.h */,
 				9278CF73141FEA5700B70414 /* TweetieCageAppDelegate.m */,
-				9278CF78141FEA5700B70414 /* TweetieCage.xcdatamodeld */,
-				9278CF6A141FEA5700B70414 /* Supporting Files */,
-				9278CF831420E72400B70414 /* Model */,
 				92A68C1A14211678005740D7 /* TCTableViewController.h */,
 				92A68C1B14211678005740D7 /* TCTableViewController.m */,
+				92FAD2441427B24F00F43636 /* TCTableViewCell.h */,
+				92FAD2451427B24F00F43636 /* TCTableViewCell.m */,
+				9278CF78141FEA5700B70414 /* TweetieCage.xcdatamodeld */,
 			);
 			path = TweetieCage;
 			sourceTree = "<group>";
@@ -245,6 +255,8 @@
 				92E68D3114228913000A4569 /* NSManagedObjectModel+ActiveRecord.m in Sources */,
 				92E68D3214228913000A4569 /* NSPersistentStore+ActiveRecord.m in Sources */,
 				92E68D3314228913000A4569 /* NSPersistentStoreCoordinator+ActiveRecord.m in Sources */,
+				92FAD2461427B24F00F43636 /* TCTableViewCell.m in Sources */,
+				92FAD2491427D01800F43636 /* NSDate+Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

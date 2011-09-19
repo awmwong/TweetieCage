@@ -7,8 +7,8 @@
 //
 
 #import "TCTableViewController.h"
-
-
+#import "TCTableViewCell.h"
+#import "NSDate+Helper.h"
 @implementation TCTableViewController
 
 @synthesize tableView;
@@ -33,7 +33,7 @@
     
     [fetchRequest setEntity:ed];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
@@ -120,19 +120,26 @@
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSDateFormatter *dateFormatter = nil;
+    if (dateFormatter == nil) 
+        dateFormatter = [[NSDateFormatter alloc] init];
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [theTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TCTableViewCell *cell = (TCTableViewCell*)[theTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     NSManagedObject *managedObject = [resultsController objectAtIndexPath:indexPath];
     
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        
-        cell.textLabel.text = [managedObject valueForKey:@"text"];
-
+        cell = [[[TCTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }   
+    //cell.textLabel.text = [managedObject valueForKey:@"name"];
+    cell.dateLabel.text =[NSDate stringForDisplayFromDate:[managedObject valueForKey:@"date"]];
+    cell.userLabel.text = [managedObject valueForKey:@"name"];
+    cell.contentLabel.text = [managedObject valueForKey:@"text"];
+    //cell.contentLabel.text = @"The lazy brown fox jumped over the brown log";
     
-    
+    //UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[managedObject valueForKey:@"imgurl"]]]]];
+    //cell.portrait = imageView;;
+                                                                          
     return cell;
 }
 
