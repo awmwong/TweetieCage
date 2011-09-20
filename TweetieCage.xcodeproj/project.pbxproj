@@ -15,7 +15,7 @@
 		9278CF70141FEA5700B70414 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9278CF6F141FEA5700B70414 /* main.m */; };
 		9278CF74141FEA5700B70414 /* TweetieCageAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9278CF73141FEA5700B70414 /* TweetieCageAppDelegate.m */; };
 		9278CF7A141FEA5700B70414 /* TweetieCage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9278CF78141FEA5700B70414 /* TweetieCage.xcdatamodeld */; };
-		9278CF821420E71400B70414 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9278CF811420E71400B70414 /* Tweet.m */; };
+		9282F0501429335E000739D2 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9282F04F1429335E000739D2 /* Tweet.m */; };
 		92A68C1C14211678005740D7 /* TCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A68C1B14211678005740D7 /* TCTableViewController.m */; };
 		92E68CC81422720F000A4569 /* YAJLiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E68CC71422720F000A4569 /* YAJLiOS.framework */; };
 		92E68D2D14228913000A4569 /* ActiveRecordHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D1F14228913000A4569 /* ActiveRecordHelpers.m */; };
@@ -42,8 +42,8 @@
 		9278CF72141FEA5700B70414 /* TweetieCageAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TweetieCageAppDelegate.h; sourceTree = "<group>"; };
 		9278CF73141FEA5700B70414 /* TweetieCageAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetieCageAppDelegate.m; sourceTree = "<group>"; };
 		9278CF79141FEA5700B70414 /* TweetieCage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TweetieCage.xcdatamodel; sourceTree = "<group>"; };
-		9278CF801420E71400B70414 /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
-		9278CF811420E71400B70414 /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
+		9282F04E1429335E000739D2 /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
+		9282F04F1429335E000739D2 /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
 		92A68C1A14211678005740D7 /* TCTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCTableViewController.h; sourceTree = "<group>"; };
 		92A68C1B14211678005740D7 /* TCTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCTableViewController.m; sourceTree = "<group>"; };
 		92E68CC71422720F000A4569 /* YAJLiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJLiOS.framework; path = Frameworks/YAJLiOS.framework; sourceTree = "<group>"; };
@@ -146,8 +146,8 @@
 		9278CF831420E72400B70414 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9278CF801420E71400B70414 /* Tweet.h */,
-				9278CF811420E71400B70414 /* Tweet.m */,
+				9282F04E1429335E000739D2 /* Tweet.h */,
+				9282F04F1429335E000739D2 /* Tweet.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -246,7 +246,6 @@
 				9278CF70141FEA5700B70414 /* main.m in Sources */,
 				9278CF74141FEA5700B70414 /* TweetieCageAppDelegate.m in Sources */,
 				9278CF7A141FEA5700B70414 /* TweetieCage.xcdatamodeld in Sources */,
-				9278CF821420E71400B70414 /* Tweet.m in Sources */,
 				92A68C1C14211678005740D7 /* TCTableViewController.m in Sources */,
 				92E68D2D14228913000A4569 /* ActiveRecordHelpers.m in Sources */,
 				92E68D2E14228913000A4569 /* ARCoreDataAction.m in Sources */,
@@ -257,6 +256,7 @@
 				92E68D3314228913000A4569 /* NSPersistentStoreCoordinator+ActiveRecord.m in Sources */,
 				92FAD2461427B24F00F43636 /* TCTableViewCell.m in Sources */,
 				92FAD2491427D01800F43636 /* NSDate+Helper.m in Sources */,
+				9282F0501429335E000739D2 /* Tweet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +296,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -315,6 +316,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

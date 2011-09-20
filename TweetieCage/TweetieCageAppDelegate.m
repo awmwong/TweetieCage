@@ -41,7 +41,6 @@
     NSData *twitterResponse = [NSData dataWithContentsOfURL:url];
     NSDictionary *responseDict = (NSDictionary*) [twitterResponse yajl_JSON];
     NSArray *resultsArray = [responseDict objectForKey:@"results"];
-    NSMutableArray *tweetsArray = [NSMutableArray array];
     NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
     
     //Dateformatter: Fri, 16 Sep 2011 01:23:45 +0000
@@ -57,8 +56,7 @@
         aTweet.imgurl = [object objectForKey:@"profile_image_url"];
         aTweet.date = [df dateFromString:[object objectForKey:@"created_at"]];
         aTweet.text = [object objectForKey:@"text"];
-        
-        [tweetsArray addObject:aTweet];
+        aTweet.tweetIDstr = [object objectForKey:@"id_str"];
     }
     
     [context save];

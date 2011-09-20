@@ -2,7 +2,7 @@
 //  Tweet.h
 //  TweetieCage
 //
-//  Created by Anthony Wong on 11-09-14.
+//  Created by Anthony Wong on 11-09-20.
 //  Copyright (c) 2011 Cleverest Solutions. All rights reserved.
 //
 
@@ -13,9 +13,10 @@
 @interface Tweet : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * imgurl;
 @property (nonatomic, retain) NSDate * date;
+@property (nonatomic, retain) NSString * imgurl;
+@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * text;
+@property (nonatomic, retain) NSString * tweetIDstr;
 
 @end
