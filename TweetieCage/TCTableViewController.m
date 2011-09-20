@@ -200,7 +200,7 @@
     }
 
 
-    cell.contentView.backgroundColor = indexPath.row % 2? [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1]: [UIColor whiteColor];
+    cell.contentView.backgroundColor = indexPath.row % 2? [UIColor colorWithRed:0.80 green:0.80 blue:0.80 alpha:1]: [UIColor whiteColor];
     return cell;
 }
 
