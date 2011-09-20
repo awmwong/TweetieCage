@@ -7,12 +7,15 @@
 //
 
 #import "TCTableViewController.h"
-
-
+#import "TCTableViewCell.h"
+#import "NSDate+Helper.h"
 @implementation TCTableViewController
 
 @synthesize tableView;
 @synthesize resultsController;
+@synthesize portraitDict;
+@synthesize imageQ;
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -27,13 +30,16 @@
 {
     [super loadView];
     
+    imageQ = [[NSOperationQueue alloc]init];
+    portraitDict = [[NSMutableDictionary alloc] init];
+    
     NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *ed = [NSEntityDescription entityForName:@"Tweet" inManagedObjectContext:context];
     
     [fetchRequest setEntity:ed];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
@@ -45,9 +51,14 @@
     NSError *error;
     BOOL success = [resultsController performFetch:&error];
     
+    if (!success)
+        NSLog(@"Something went bad during the fetch!");
+    
     tableView = [[UITableView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
     tableView.delegate = self;
     tableView.dataSource = self;
+    
+    [fetchRequest release];
     
     
 }
@@ -100,6 +111,8 @@
 - (void) dealloc
 {
     //free self stuff
+    [portraitDict dealloc];
+    [imageQ dealloc];
     [super dealloc];
 }
 
@@ -120,60 +133,77 @@
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSDateFormatter *dateFormatter = nil;
+    if (dateFormatter == nil) 
+        dateFormatter = [[NSDateFormatter alloc] init];
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [theTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TCTableViewCell *cell = (TCTableViewCell*)[theTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     NSManagedObject *managedObject = [resultsController objectAtIndexPath:indexPath];
     
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        
-        cell.textLabel.text = [managedObject valueForKey:@"text"];
-
+        cell = [[[TCTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }   
     
+    cell.dateLabel.text =[NSDate stringForDisplayFromDate:[managedObject valueForKey:@"date"]];
+    cell.userLabel.text = [managedObject valueForKey:@"name"];
+    cell.contentLabel.text = [managedObject valueForKey:@"text"];
     
+    //Resize logic
+    UILabel *lbl = cell.contentLabel;
+    CGRect cellFrame = [cell frame];
+    [lbl setFrame:CGRectMake(X_OFFSET, Y_OFFSET, TEXT_WIDTH, TEXT_HEIGHT)];
+    [lbl sizeToFit];
+    if(lbl.frame.size.height > TEXT_HEIGHT)
+    {
+        cellFrame.size.height = ROW_HEIGHT + lbl.frame.size.height - TEXT_HEIGHT;
+    }
+    else
+    {
+        cellFrame.size.height = ROW_HEIGHT;
+    }
+    
+    [cell setFrame:cellFrame];
+    
+    
+    NSString *urlString = [managedObject valueForKey:@"imgurl"];
+    __block UIImage *img = [self.portraitDict objectForKey:urlString];
+    
+    if (img == nil) //doesn't already exist in cache
+    {
+        //Attempt #5 at image caching;
+        NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^(void){  
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
+            img = [UIImage imageWithData:imageData];
+            if (img == nil)
+            {
+                NSLog(@"Something went wrong with image from data");
+            } 
+            else
+            {
+                [self.portraitDict setObject:img forKey:urlString];
+            }
+        }];
+        
+        [operation setCompletionBlock:^{
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                if (img == nil) return;
+                [cell.portrait setImage:img]; 
+            }];
+            
+        }];
+        
+        [imageQ addOperation:operation];
+    } else
+    {
+        [cell.portrait setImage:img];
+    }
+
+
+    cell.contentView.backgroundColor = indexPath.row % 2? [UIColor colorWithRed:0.80 green:0.80 blue:0.80 alpha:1]: [UIColor whiteColor];
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -187,6 +217,12 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
+}
+
+- (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{    
+    UITableViewCell *cell = [self tableView:theTableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
 }
 
 @end

@@ -3,7 +3,7 @@
 //  TweetieCage
 //
 //  Created by Anthony Wong on 11-09-13.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011. All rights reserved.
 //
 
 #import "TweetieCageAppDelegate.h"
@@ -13,7 +13,6 @@
 @interface TweetieCageAppDelegate (private)
     // forward declarations for helpers
 -(void)getDataFromTwitter;
--(void)displayData;
 @end
 
 @implementation TweetieCageAppDelegate
@@ -26,10 +25,11 @@
 
     // Override point for customization after application launch.
     window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
     tableViewController = [[[TCTableViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
-    //[self getDataFromTwitter];
-    [self displayData];
+    //NSBlockOperation blockOp = [NSBlockOperation 
+    //[Tweet truncateAll];
+    //  [self getDataFromTwitter];
+    
     [window setRootViewController:tableViewController];
     [window makeKeyAndVisible];
     return YES;
@@ -62,13 +62,6 @@
     }
     
     [context save];
-}
-
-- (void) displayData
-{
-    NSArray *tweetsArray = [Tweet findAll];
-    
-    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
