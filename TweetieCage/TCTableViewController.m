@@ -54,7 +54,7 @@
     if (!success)
         NSLog(@"Something went bad during the fetch!");
     
-    tableView = [[UITableView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+    tableView = [[[UITableView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]]autorelease];
     tableView.delegate = self;
     tableView.dataSource = self;
     
@@ -167,28 +167,25 @@
     
     
     NSString *urlString = [managedObject valueForKey:@"imgurl"];
-    __block UIImage *img = [self.portraitDict objectForKey:urlString];
+    UIImage *img = [self.portraitDict objectForKey:urlString];
     
     if (img == nil) //doesn't already exist in cache
     {
         //Attempt #5 at image caching;
         NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^(void){  
             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
-            img = [UIImage imageWithData:imageData];
-            if (img == nil)
-            {
-                NSLog(@"Something went wrong with image from data");
-            } 
-            else
-            {
-                [self.portraitDict setObject:img forKey:urlString];
-            }
-        }];
+            UIImage* img = [UIImage imageWithData:imageData];
         
-        [operation setCompletionBlock:^{
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                if (img == nil) return;
-                [cell.portrait setImage:img]; 
+                if (img == nil)
+                {
+                    NSLog(@"Something went wrong with image from data");
+                } 
+                else
+                {
+                    [self.portraitDict setObject:img forKey:urlString];
+                    [cell.portrait setImage:img]; 
+                }
             }];
             
         }];
@@ -198,8 +195,6 @@
     {
         [cell.portrait setImage:img];
     }
-
-
     cell.contentView.backgroundColor = indexPath.row % 2? [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1]: [UIColor whiteColor];
     return cell;
 }

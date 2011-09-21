@@ -11,6 +11,7 @@
 @implementation TCTableViewCell
 @synthesize contentLabel, userLabel, dateLabel;
 @synthesize portrait;
+@synthesize imgURL;
 
 
 
@@ -58,6 +59,8 @@
         contentLabel.font = [UIFont systemFontOfSize:12.0];
         [theContentView addSubview:contentLabel];
         [contentLabel release];
+        
+        imgURL = [[[NSString alloc] init] autorelease];
         
         //ns operation finishes, block, don't cancel ns operation. 
         //ivar operation and check for self assignment..

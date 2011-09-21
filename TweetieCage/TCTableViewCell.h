@@ -24,12 +24,13 @@
     UILabel *contentLabel;
     UILabel *dateLabel;
     UIImageView *portrait;
+    NSString *imgURL;
 }
 
 @property (nonatomic, retain) UILabel *userLabel;
 @property (nonatomic, retain) UILabel *contentLabel;
 @property (nonatomic, retain) UILabel *dateLabel;
 @property (nonatomic, retain) UIImageView *portrait;
-
+@property (nonatomic, retain) NSString *imgURL;
 
 @end
