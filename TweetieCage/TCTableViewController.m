@@ -8,13 +8,18 @@
 
 #import "TCTableViewController.h"
 #import "TCTableViewCell.h"
+#import "TCTweetDetailsViewController.h"
 #import "NSDate+Helper.h"
+#import "Tweet.h"
+@interface TCTableViewController (private)
+-(void) configureCell:(TCTableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath;
+@end
 @implementation TCTableViewController
 
-@synthesize tableView;
-@synthesize resultsController;
-@synthesize portraitDict;
-@synthesize imageQ;
+@synthesize tableView = _tableView; //shortcut to create iVars
+@synthesize resultsController = _resultsController;
+@synthesize portraitDict = _portraitDict;
+@synthesize imageQ = _imageQ;
 
 - (void)didReceiveMemoryWarning
 {
@@ -30,37 +35,31 @@
 {
     [super loadView];
     
-    imageQ = [[NSOperationQueue alloc]init];
-    portraitDict = [[NSMutableDictionary alloc] init];
+    self.view = [[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 480)]autorelease];
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+    self.imageQ = [[[NSOperationQueue alloc] init] autorelease] ;
+    self.portraitDict = [[[NSMutableDictionary alloc] init] autorelease]; 
     
     NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *ed = [NSEntityDescription entityForName:@"Tweet" inManagedObjectContext:context];
     
-    [fetchRequest setEntity:ed];
-    
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-    
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    [sortDescriptors release];
-    [sortDescriptor release];
-    
-    resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
-    
+    self.resultsController = [Tweet fetchAllSortedBy:@"date" ascending:NO withPredicate:nil groupBy:nil inContext:context];
+    self.resultsController.delegate = self;
     NSError *error;
-    BOOL success = [resultsController performFetch:&error];
+    BOOL success = [self.resultsController performFetch:&error];
     
     if (!success)
+    {
         NSLog(@"Something went bad during the fetch!");
-    
-    tableView = [[[UITableView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]]autorelease];
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    
-    [fetchRequest release];
+    }
     
     
+    self.tableView = [[[UITableView alloc] initWithFrame:self.view.bounds] autorelease];
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    [self.view addSubview:self.tableView];
 }
 - (void)viewDidLoad
 {
@@ -73,6 +72,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.title = @"Tweets";
 }
 
 - (void)viewDidUnload
@@ -111,8 +111,11 @@
 - (void) dealloc
 {
     //free self stuff
-    [portraitDict dealloc];
-    [imageQ dealloc];
+    self.portraitDict = nil;
+    self.imageQ = nil;
+    self.resultsController.delegate = nil;
+    self.resultsController = nil;
+    self.tableView = nil;
     [super dealloc];
 }
 
@@ -121,81 +124,28 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [[resultsController sections] count];
+    NSInteger retVal = [[self.resultsController sections] count];
+    return retVal;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[resultsController sections] objectAtIndex:section];
-    return [sectionInfo numberOfObjects];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.resultsController sections] objectAtIndex:section];
+    NSInteger retVal = [sectionInfo numberOfObjects];
+    return retVal;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSDateFormatter *dateFormatter = nil;
-    if (dateFormatter == nil) 
-        dateFormatter = [[NSDateFormatter alloc] init];
+{    
     static NSString *CellIdentifier = @"Cell";
-    
     TCTableViewCell *cell = (TCTableViewCell*)[theTableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    NSManagedObject *managedObject = [resultsController objectAtIndexPath:indexPath];
     
     if (cell == nil) {
         cell = [[[TCTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }   
-    
-    cell.dateLabel.text =[NSDate stringForDisplayFromDate:[managedObject valueForKey:@"date"]];
-    cell.userLabel.text = [managedObject valueForKey:@"name"];
-    cell.contentLabel.text = [managedObject valueForKey:@"text"];
-    
-    //Resize logic
-    UILabel *lbl = cell.contentLabel;
-    CGRect cellFrame = [cell frame];
-    [lbl setFrame:CGRectMake(X_OFFSET, Y_OFFSET, TEXT_WIDTH, TEXT_HEIGHT)];
-    [lbl sizeToFit];
-    if(lbl.frame.size.height > TEXT_HEIGHT)
-    {
-        cellFrame.size.height = ROW_HEIGHT + lbl.frame.size.height - TEXT_HEIGHT;
-    }
-    else
-    {
-        cellFrame.size.height = ROW_HEIGHT;
     }
     
-    [cell setFrame:cellFrame];
-    
-    
-    NSString *urlString = [managedObject valueForKey:@"imgurl"];
-    UIImage *img = [self.portraitDict objectForKey:urlString];
-    
-    if (img == nil) //doesn't already exist in cache
-    {
-        //Attempt #5 at image caching;
-        NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^(void){  
-            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
-            UIImage* img = [UIImage imageWithData:imageData];
-        
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                if (img == nil)
-                {
-                    NSLog(@"Something went wrong with image from data");
-                } 
-                else
-                {
-                    [self.portraitDict setObject:img forKey:urlString];
-                    [cell.portrait setImage:img]; 
-                }
-            }];
-            
-        }];
-        
-        [imageQ addOperation:operation];
-    } else
-    {
-        [cell.portrait setImage:img];
-    }
-    cell.contentView.backgroundColor = indexPath.row % 2? [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1]: [UIColor whiteColor];
+    [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
@@ -212,12 +162,133 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
+    
+    Tweet *tweet = (Tweet*) [self.resultsController objectAtIndexPath:indexPath];
+    
+    TCTweetDetailsViewController *detailsViewController = [[[TCTweetDetailsViewController alloc] initWithNibName:@"TCTweetDetailsView" bundle:nil] autorelease];
+    detailsViewController.tweet = tweet;
+    
+    [self.navigationController pushViewController:detailsViewController animated:YES];
+    
+    
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {    
-    UITableViewCell *cell = [self tableView:theTableView cellForRowAtIndexPath:indexPath];
-    return cell.frame.size.height;
+    Tweet *tweet = (Tweet*) [self.resultsController objectAtIndexPath:indexPath];
+    CGFloat retVal = [TCTableViewCell heightForCellWithWidth:self.view.frame.size.width text:tweet.text];
+    return retVal;
+
 }
 
+
+#pragma mark - NSFetchedResultsController delegates
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                          withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                          withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:(TCTableViewCell*) [tableView cellForRowAtIndexPath:indexPath]
+                    atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
+}
+
+-(void) configureCell:(TCTableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
+{
+    Tweet *tweet = (Tweet*) [self.resultsController objectAtIndexPath:indexPath];
+    static NSDateFormatter *dateFormatter = nil;
+    if (dateFormatter == nil) 
+        dateFormatter = [[NSDateFormatter alloc] init];
+
+    
+    cell.dateLabel.text =[NSDate stringForDisplayFromDate:tweet.date];
+    cell.userLabel.text = tweet.name;
+    cell.textView.text = tweet.text;
+    
+    NSString *urlString = tweet.imgurl;
+    UIImage *img = [self.portraitDict objectForKey:urlString];
+    
+    if (img == nil) //doesn't already exist in cache
+    {
+        cell.imgURL = urlString; // set the url so we can check when operation completes
+        
+        //Attempt #5 at image caching;
+        [self.imageQ addOperationWithBlock:^(void){  
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
+            UIImage* img = [UIImage imageWithData:imageData];
+            
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                if (img == nil)
+                {
+                    NSLog(@"Something went wrong with image from data");
+                } 
+                else
+                {
+                    [self.portraitDict setObject:img forKey:urlString];
+                    if ([cell.imgURL isEqual:urlString])
+                    {//makes sure the cell hasn't been reused while background stuff is going on.
+                        [cell.portrait setImage:img]; 
+                    }
+                }
+            }];
+            
+        }];
+        
+    } else
+    {
+        [cell.portrait setImage:img];
+    }
+    
+    cell.contentView.backgroundColor = indexPath.row % 2? [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1]: [UIColor whiteColor];
+
+}
 @end

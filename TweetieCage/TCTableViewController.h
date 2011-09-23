@@ -8,13 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ImageFetchOperation.h"
-@interface TCTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
-{
-    NSFetchedResultsController *resultsController;
-    NSMutableDictionary *portraitDict;
-    NSOperationQueue *imageQ;
-}
+@interface TCTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
+
 @property (nonatomic, retain) NSFetchedResultsController *resultsController;
 @property (nonatomic, retain) NSMutableDictionary *portraitDict;
 @property (nonatomic, retain) NSOperationQueue *imageQ;
+@property (nonatomic, retain) UITableView *tableView;
 @end

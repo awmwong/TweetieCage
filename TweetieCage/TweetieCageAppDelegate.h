@@ -10,11 +10,8 @@
 #import "TCTableViewController.h"
 
 @interface TweetieCageAppDelegate : NSObject <UIApplicationDelegate>
-{
-    TCTableViewController *tableViewController;
-}
 
 @property (nonatomic, retain) UIWindow *window;
 @property (nonatomic, retain) TCTableViewController *tableViewController;
-
+@property (nonatomic, retain) NSOperationQueue *backgroundFetchingQueue;
 @end

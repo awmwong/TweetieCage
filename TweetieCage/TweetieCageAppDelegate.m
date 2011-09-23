@@ -17,81 +17,87 @@
 
 @implementation TweetieCageAppDelegate
 
-@synthesize window, tableViewController;
+@synthesize window =_window;
+@synthesize tableViewController = _tableViewController;
+@synthesize backgroundFetchingQueue = _backgroundFetchingQueue;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [ActiveRecordHelpers setupCoreDataStack];
-
+    
     // Override point for customization after application launch.
-    window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    tableViewController = [[[TCTableViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.tableViewController = [[[TCTableViewController alloc] init] autorelease];
+    self.backgroundFetchingQueue = [[[NSOperationQueue alloc] init] autorelease];
     //NSBlockOperation blockOp = [NSBlockOperation 
     //[Tweet truncateAll];
+    UINavigationController *uiNav = [[[UINavigationController alloc]initWithRootViewController:self.tableViewController] autorelease];
+    [self.window setRootViewController:uiNav];
+    [self.window makeKeyAndVisible];
     [self getDataFromTwitter];
-    
-    [window setRootViewController:tableViewController];
-    [window makeKeyAndVisible];
+
     return YES;
 }
 
 - (void) getDataFromTwitter
 {
-    
-    NSURL *url = [NSURL URLWithString:@"http://search.twitter.com/search.json?q=anthowong&rpp=100"];
-    NSData *twitterResponse = [NSData dataWithContentsOfURL:url];
-    NSDictionary *responseDict = (NSDictionary*) [twitterResponse yajl_JSON];
-    NSArray *resultsArray = [responseDict objectForKey:@"results"];
-
-    NSMutableArray *idArray = [NSMutableArray array];
-    for (id object in resultsArray)
-        [idArray addObject:[object objectForKey:@"id_str"]];
-    [idArray sortUsingSelector:@selector(compare:)];
-    
-    
-    NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *ed = [NSEntityDescription entityForName:@"Tweet" inManagedObjectContext:context];
-    [fetchRequest setEntity:ed];    
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"(tweetIDstr IN %@)", idArray]];
-
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"tweetIDstr" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    [sortDescriptor release];
-    [sortDescriptors release];
-    
-    NSError *error = nil;
-    NSArray *storedTweets = [context executeFetchRequest:fetchRequest error:&error];
-    [fetchRequest release];
-    
-    NSMutableSet *storedTweetIDs = [[NSMutableSet alloc] init];
-    for (id tweet in storedTweets){
-        [storedTweetIDs addObject: [tweet tweetIDstr]];
-    }
-    
-    //Dateformatter: Fri, 16 Sep 2011 01:23:45 +0000
-    NSDateFormatter *df = [[[NSDateFormatter alloc] init] autorelease];
-    [df setTimeStyle:NSDateFormatterFullStyle];
-    [df setFormatterBehavior:NSDateFormatterBehavior10_4];
-    [df setDateFormat:@"EEE, d LLL yyyy HH:mm:ss Z"];
-    
-    for (id object in resultsArray){
-        if (![storedTweetIDs containsObject:[object objectForKey:@"id_str"]]){
-            Tweet *aTweet = [Tweet createEntity];
-            
-            aTweet.name = [object objectForKey:@"from_user"];
-            aTweet.imgurl = [object objectForKey:@"profile_image_url"];
-            aTweet.date = [df dateFromString:[object objectForKey:@"created_at"]];
-            aTweet.text = [object objectForKey:@"text"];
-            aTweet.tweetIDstr = [object objectForKey:@"id_str"];
-        }
-    }
+    [self.backgroundFetchingQueue addOperationWithBlock:^(void){
+        NSURL *url = [NSURL URLWithString:@"http://search.twitter.com/search.json?q=anthowong&rpp=100"];
+        NSData *twitterResponse = [NSData dataWithContentsOfURL:url];
+        NSDictionary *responseDict = (NSDictionary*) [twitterResponse yajl_JSON];
+        NSArray *resultsArray = [responseDict objectForKey:@"results"];
         
-    
-
-    
-    [context save];
+        NSMutableArray *idArray = [NSMutableArray array];
+        for (id object in resultsArray)
+        {
+            [idArray addObject:[object objectForKey:@"id_str"]];
+        }
+        [idArray sortUsingSelector:@selector(compare:)];
+        
+        
+        NSManagedObjectContext *context = [NSManagedObjectContext context];
+        [context setNotifiesMainContextOnSave:YES];
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *ed = [NSEntityDescription entityForName:@"Tweet" inManagedObjectContext:context];
+        [fetchRequest setEntity:ed];    
+        [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"(tweetIDstr IN %@)", idArray]];
+        
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"tweetIDstr" ascending:YES];
+        NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+        [fetchRequest setSortDescriptors:sortDescriptors];
+        [sortDescriptor release];
+        [sortDescriptors release];
+        
+        NSError *error = nil;
+        NSArray *storedTweets = [context executeFetchRequest:fetchRequest error:&error];
+        [fetchRequest release];
+        
+        NSMutableSet *storedTweetIDs = [[NSMutableSet alloc] init];
+        for (id tweet in storedTweets){
+            [storedTweetIDs addObject: [tweet tweetIDstr]];
+        }
+        
+        //Dateformatter: Fri, 16 Sep 2011 01:23:45 +0000
+        NSDateFormatter *df = [[[NSDateFormatter alloc] init] autorelease];
+        [df setTimeStyle:NSDateFormatterFullStyle];
+        [df setFormatterBehavior:NSDateFormatterBehavior10_4];
+        [df setDateFormat:@"EEE, d LLL yyyy HH:mm:ss Z"];
+        
+        for (id object in resultsArray){
+            if (![storedTweetIDs containsObject:[object objectForKey:@"id_str"]]){
+                Tweet *aTweet = [Tweet createInContext:context];
+                
+                aTweet.name = [object objectForKey:@"from_user"];
+                aTweet.imgurl = [object objectForKey:@"profile_image_url"];
+                aTweet.date = [df dateFromString:[object objectForKey:@"created_at"]];
+                aTweet.text = [object objectForKey:@"text"];
+                aTweet.tweetIDstr = [object objectForKey:@"id_str"];
+            }
+        }
+        
+        [context save];
+    }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
