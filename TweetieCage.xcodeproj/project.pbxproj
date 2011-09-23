@@ -10,6 +10,7 @@
 		922D8E68142BBEBF00B85152 /* TextWrapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 922D8E67142BBEBF00B85152 /* TextWrapView.m */; };
 		922D8E6B142CC60900B85152 /* TCTweetDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 922D8E6A142CC60900B85152 /* TCTweetDetailsView.xib */; };
 		922D8E6E142CD84300B85152 /* TCTweetDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922D8E6D142CD84300B85152 /* TCTweetDetailsViewController.m */; };
+		922D8E70142D23C200B85152 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922D8E6F142D23C200B85152 /* MapKit.framework */; };
 		9278CF62141FEA5700B70414 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9278CF61141FEA5700B70414 /* UIKit.framework */; };
 		9278CF64141FEA5700B70414 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9278CF63141FEA5700B70414 /* Foundation.framework */; };
 		9278CF66141FEA5700B70414 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9278CF65141FEA5700B70414 /* CoreGraphics.framework */; };
@@ -38,6 +39,7 @@
 		922D8E6A142CC60900B85152 /* TCTweetDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TCTweetDetailsView.xib; sourceTree = "<group>"; };
 		922D8E6C142CD84200B85152 /* TCTweetDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCTweetDetailsViewController.h; sourceTree = "<group>"; };
 		922D8E6D142CD84300B85152 /* TCTweetDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCTweetDetailsViewController.m; sourceTree = "<group>"; };
+		922D8E6F142D23C200B85152 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9278CF5D141FEA5700B70414 /* TweetieCage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TweetieCage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9278CF61141FEA5700B70414 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9278CF63141FEA5700B70414 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -81,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				922D8E70142D23C200B85152 /* MapKit.framework in Frameworks */,
 				9278CF62141FEA5700B70414 /* UIKit.framework in Frameworks */,
 				9278CF64141FEA5700B70414 /* Foundation.framework in Frameworks */,
 				9278CF66141FEA5700B70414 /* CoreGraphics.framework in Frameworks */,
@@ -112,6 +115,7 @@
 		9278CF60141FEA5700B70414 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				922D8E6F142D23C200B85152 /* MapKit.framework */,
 				92E68CC71422720F000A4569 /* YAJLiOS.framework */,
 				9278CF61141FEA5700B70414 /* UIKit.framework */,
 				9278CF63141FEA5700B70414 /* Foundation.framework */,

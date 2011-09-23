@@ -7,7 +7,7 @@
 //
 
 #import "TCTweetDetailsViewController.h"
-
+#import "NSDate+Helper.h"
 @implementation TCTweetDetailsViewController
 @synthesize userName = _userName, fullName = _fullName, content = _content, date=_date;
 @synthesize portrait = _portrait;
@@ -52,6 +52,7 @@
     CGRect dateFrame = self.date.frame;
     dateFrame.origin.y = (self.content.frame.origin.y) + (self.content.frame.size.height);
     self.date.frame = dateFrame;
+    self.date.text = [NSString stringWithFormat:@"%@%@", @"Posted ", [NSDate stringForDisplayFromDate:self.tweet.date prefixed:YES alwaysDisplayTime:YES]];;
     
     [self.imgQ addOperationWithBlock:^(void){  
         NSLog(@"Background firing");
@@ -71,6 +72,7 @@
         }];
         
     }];
+    
 }
 
 
