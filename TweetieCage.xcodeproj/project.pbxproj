@@ -11,6 +11,7 @@
 		922D8E6B142CC60900B85152 /* TCTweetDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 922D8E6A142CC60900B85152 /* TCTweetDetailsView.xib */; };
 		922D8E6E142CD84300B85152 /* TCTweetDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 922D8E6D142CD84300B85152 /* TCTweetDetailsViewController.m */; };
 		922D8E70142D23C200B85152 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922D8E6F142D23C200B85152 /* MapKit.framework */; };
+		922D8E77142D299400B85152 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 922D8E76142D299400B85152 /* Tweet.m */; };
 		9278CF62141FEA5700B70414 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9278CF61141FEA5700B70414 /* UIKit.framework */; };
 		9278CF64141FEA5700B70414 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9278CF63141FEA5700B70414 /* Foundation.framework */; };
 		9278CF66141FEA5700B70414 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9278CF65141FEA5700B70414 /* CoreGraphics.framework */; };
@@ -19,7 +20,6 @@
 		9278CF70141FEA5700B70414 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9278CF6F141FEA5700B70414 /* main.m */; };
 		9278CF74141FEA5700B70414 /* TweetieCageAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9278CF73141FEA5700B70414 /* TweetieCageAppDelegate.m */; };
 		9278CF7A141FEA5700B70414 /* TweetieCage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9278CF78141FEA5700B70414 /* TweetieCage.xcdatamodeld */; };
-		9282F0501429335E000739D2 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9282F04F1429335E000739D2 /* Tweet.m */; };
 		92A68C1C14211678005740D7 /* TCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A68C1B14211678005740D7 /* TCTableViewController.m */; };
 		92E68CC81422720F000A4569 /* YAJLiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E68CC71422720F000A4569 /* YAJLiOS.framework */; };
 		92E68D2D14228913000A4569 /* ActiveRecordHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E68D1F14228913000A4569 /* ActiveRecordHelpers.m */; };
@@ -40,6 +40,8 @@
 		922D8E6C142CD84200B85152 /* TCTweetDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCTweetDetailsViewController.h; sourceTree = "<group>"; };
 		922D8E6D142CD84300B85152 /* TCTweetDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCTweetDetailsViewController.m; sourceTree = "<group>"; };
 		922D8E6F142D23C200B85152 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		922D8E75142D299400B85152 /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
+		922D8E76142D299400B85152 /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
 		9278CF5D141FEA5700B70414 /* TweetieCage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TweetieCage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9278CF61141FEA5700B70414 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9278CF63141FEA5700B70414 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -52,8 +54,6 @@
 		9278CF72141FEA5700B70414 /* TweetieCageAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TweetieCageAppDelegate.h; sourceTree = "<group>"; };
 		9278CF73141FEA5700B70414 /* TweetieCageAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetieCageAppDelegate.m; sourceTree = "<group>"; };
 		9278CF79141FEA5700B70414 /* TweetieCage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TweetieCage.xcdatamodel; sourceTree = "<group>"; };
-		9282F04E1429335E000739D2 /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
-		9282F04F1429335E000739D2 /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
 		92A68C1A14211678005740D7 /* TCTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCTableViewController.h; sourceTree = "<group>"; };
 		92A68C1B14211678005740D7 /* TCTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCTableViewController.m; sourceTree = "<group>"; };
 		92E68CC71422720F000A4569 /* YAJLiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJLiOS.framework; path = Frameworks/YAJLiOS.framework; sourceTree = "<group>"; };
@@ -163,8 +163,8 @@
 		9278CF831420E72400B70414 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9282F04E1429335E000739D2 /* Tweet.h */,
-				9282F04F1429335E000739D2 /* Tweet.m */,
+				922D8E75142D299400B85152 /* Tweet.h */,
+				922D8E76142D299400B85152 /* Tweet.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -274,9 +274,9 @@
 				92E68D3314228913000A4569 /* NSPersistentStoreCoordinator+ActiveRecord.m in Sources */,
 				92FAD2461427B24F00F43636 /* TCTableViewCell.m in Sources */,
 				92FAD2491427D01800F43636 /* NSDate+Helper.m in Sources */,
-				9282F0501429335E000739D2 /* Tweet.m in Sources */,
 				922D8E68142BBEBF00B85152 /* TextWrapView.m in Sources */,
 				922D8E6E142CD84300B85152 /* TCTweetDetailsViewController.m in Sources */,
+				922D8E77142D299400B85152 /* Tweet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
