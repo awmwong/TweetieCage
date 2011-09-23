@@ -2,7 +2,7 @@
 //  Tweet.m
 //  TweetieCage
 //
-//  Created by Anthony Wong on 11-09-14.
+//  Created by Anthony Wong on 11-09-20.
 //  Copyright (c) 2011 Cleverest Solutions. All rights reserved.
 //
 
@@ -10,9 +10,10 @@
 
 
 @implementation Tweet
-@dynamic name;
-@dynamic imgurl;
 @dynamic date;
+@dynamic imgurl;
+@dynamic name;
 @dynamic text;
+@dynamic tweetIDstr;
 
 @end

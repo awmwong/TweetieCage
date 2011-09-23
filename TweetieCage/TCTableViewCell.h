@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TextWrapView.h"
 #define PADDING 2
 #define IMAGE_SIZE 50
 #define LABEL_WIDTH 130
@@ -19,17 +20,14 @@
 
 
 @interface TCTableViewCell : UITableViewCell
-{
-    UILabel *userLabel;
-    UILabel *contentLabel;
-    UILabel *dateLabel;
-    UIImageView *portrait;
-}
+
 
 @property (nonatomic, retain) UILabel *userLabel;
 @property (nonatomic, retain) UILabel *contentLabel;
 @property (nonatomic, retain) UILabel *dateLabel;
 @property (nonatomic, retain) UIImageView *portrait;
+@property (nonatomic, retain) NSString *imgURL;
+@property (nonatomic, retain) TextWrapView *textView;
 
-
++(CGFloat) heightForCellWithWidth:(CGFloat)width text:(NSString*)text;
 @end

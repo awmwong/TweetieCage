@@ -5,6 +5,7 @@
         <attribute name="imgurl" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="text" optional="YES" attributeType="String"/>
+        <attribute name="tweetIDstr" optional="YES" attributeType="String"/>
     </entity>
     <elements>
         <element name="Tweet" positionX="160" positionY="192" width="128" height="105"/>
