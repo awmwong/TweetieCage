@@ -30,7 +30,7 @@
     self.tableViewController = [[[TCTableViewController alloc] init] autorelease];
     self.backgroundFetchingQueue = [[[NSOperationQueue alloc] init] autorelease];
     //NSBlockOperation blockOp = [NSBlockOperation 
-    //[Tweet truncateAll];
+    [Tweet truncateAll];
     UINavigationController *uiNav = [[[UINavigationController alloc]initWithRootViewController:self.tableViewController] autorelease];
     [self.window setRootViewController:uiNav];
     [self.window makeKeyAndVisible];
@@ -42,7 +42,7 @@
 - (void) getDataFromTwitter
 {
     [self.backgroundFetchingQueue addOperationWithBlock:^(void){
-        NSURL *url = [NSURL URLWithString:@"http://search.twitter.com/search.json?q=anthowong&rpp=100"];
+        NSURL *url = [NSURL URLWithString:@"http://search.twitter.com/search.json?q=theworkinggroup&rpp=100"];
         NSData *twitterResponse = [NSData dataWithContentsOfURL:url];
         NSDictionary *responseDict = (NSDictionary*) [twitterResponse yajl_JSON];
         NSArray *resultsArray = [responseDict objectForKey:@"results"];
@@ -93,8 +93,23 @@
                 aTweet.date = [df dateFromString:[object objectForKey:@"created_at"]];
                 aTweet.text = [object objectForKey:@"text"];
                 aTweet.tweetIDstr = [object objectForKey:@"id_str"];
+                NSDictionary *geo = [object objectForKey:@"geo"];
+                
+                if (geo == nil || (NSNull*) geo == [NSNull null])
+                {
+                    aTweet.latitude = nil;
+                    aTweet.longitude = nil;
+                }
+                else
+                {
+                    NSArray *coordinates = [geo objectForKey:@"coordinates"];
+                    aTweet.latitude = [coordinates objectAtIndex:0];
+                    aTweet.longitude = [coordinates objectAtIndex:1];
+                }
+
             }
         }
+        
         
         [context save];
     }];

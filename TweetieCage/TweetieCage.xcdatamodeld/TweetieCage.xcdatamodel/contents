@@ -3,11 +3,13 @@
     <entity name="Tweet" representedClassName="Tweet">
         <attribute name="date" optional="YES" attributeType="Date"/>
         <attribute name="imgurl" optional="YES" attributeType="String"/>
+        <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0"/>
+        <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="text" optional="YES" attributeType="String"/>
         <attribute name="tweetIDstr" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Tweet" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="Tweet" positionX="160" positionY="192" width="128" height="150"/>
     </elements>
 </model>

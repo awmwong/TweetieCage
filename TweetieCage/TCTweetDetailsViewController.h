@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 #import "Tweet.h"
 @interface TCTweetDetailsViewController : UIViewController
 
@@ -17,4 +18,5 @@
 @property(nonatomic, retain) IBOutlet UIImageView* portrait;
 @property(nonatomic, retain) Tweet* tweet;
 @property(nonatomic, retain) NSOperationQueue* imgQ;
+@property(nonatomic, retain) IBOutlet MKMapView* map;
 @end

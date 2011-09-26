@@ -8,11 +8,13 @@
 
 #import "TCTweetDetailsViewController.h"
 #import "NSDate+Helper.h"
+#define METERS_PER_MILE 1609.344
 @implementation TCTweetDetailsViewController
 @synthesize userName = _userName, fullName = _fullName, content = _content, date=_date;
 @synthesize portrait = _portrait;
 @synthesize tweet = _tweet;
 @synthesize imgQ = _imgQ;
+@synthesize map = _map;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,7 +47,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.userName.text = self.tweet.name;
+    self.userName.text = [NSString stringWithFormat:@"%@%@", @"@", self.tweet.name];
     self.content.text = self.tweet.text;
     [self.content sizeToFit];
     
@@ -55,7 +57,6 @@
     self.date.text = [NSString stringWithFormat:@"%@%@", @"Posted ", [NSDate stringForDisplayFromDate:self.tweet.date prefixed:YES alwaysDisplayTime:YES]];;
     
     [self.imgQ addOperationWithBlock:^(void){  
-        NSLog(@"Background firing");
         NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.tweet.imgurl]];
         UIImage* img = [UIImage imageWithData:imageData];
         
@@ -73,6 +74,22 @@
         
     }];
     
+    //map stuff!
+    if (self.tweet.latitude != nil)
+    {
+        self.map.hidden = NO;
+        CLLocationCoordinate2D zoomLocation;
+        zoomLocation.latitude = [self.tweet.latitude doubleValue];
+        zoomLocation.longitude = [self.tweet.longitude doubleValue];
+        MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
+        MKCoordinateRegion adjustedRegion = [self.map regionThatFits:viewRegion];                
+        [self.map setRegion:adjustedRegion animated:YES]; 
+        
+    }
+    else
+    {
+        self.map.hidden = YES;
+    }
 }
 
 
