@@ -10,39 +10,40 @@
 #import "Tweet.h"
 #import <YAJLiOS/YAJL.h>
 
-@interface TweetieCageAppDelegate (private)
-    // forward declarations for helpers
--(void)getDataFromTwitter;
-@end
+//@interface TweetieCageAppDelegate
+//    // forward declarations for helpers
+//-(void)getDataFromTwitterWithUser:(NSString*)user;
+//@end
 
 @implementation TweetieCageAppDelegate
 
 @synthesize window =_window;
 @synthesize tableViewController = _tableViewController;
 @synthesize backgroundFetchingQueue = _backgroundFetchingQueue;
-
+@synthesize searchViewController = _searchViewController;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [ActiveRecordHelpers setupCoreDataStack];
-    
+    [[NSManagedObjectContext defaultContext] setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
     // Override point for customization after application launch.
+    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.tableViewController = [[[TCTableViewController alloc] init] autorelease];
+    self.searchViewController = [[[TCSearchViewController alloc] initWithNibName:@"TCSearchView" bundle:nil] autorelease];
+    
     self.backgroundFetchingQueue = [[[NSOperationQueue alloc] init] autorelease];
-    //NSBlockOperation blockOp = [NSBlockOperation 
-    [Tweet truncateAll];
     UINavigationController *uiNav = [[[UINavigationController alloc]initWithRootViewController:self.tableViewController] autorelease];
     [self.window setRootViewController:uiNav];
     [self.window makeKeyAndVisible];
-    [self getDataFromTwitter];
-
+    
+    [self getDataFromTwitterWithUser:@"psobot"];
     return YES;
 }
 
-- (void) getDataFromTwitter
+- (void) getDataFromTwitterWithUser:(NSString*) user
 {
     [self.backgroundFetchingQueue addOperationWithBlock:^(void){
-        NSURL *url = [NSURL URLWithString:@"http://search.twitter.com/search.json?q=theworkinggroup&rpp=100"];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://search.twitter.com/search.json?q=%@&rpp=100", user]];
         NSData *twitterResponse = [NSData dataWithContentsOfURL:url];
         NSDictionary *responseDict = (NSDictionary*) [twitterResponse yajl_JSON];
         NSArray *resultsArray = [responseDict objectForKey:@"results"];
@@ -58,20 +59,9 @@
         NSManagedObjectContext *context = [NSManagedObjectContext context];
         [context setNotifiesMainContextOnSave:YES];
         
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *ed = [NSEntityDescription entityForName:@"Tweet" inManagedObjectContext:context];
-        [fetchRequest setEntity:ed];    
-        [fetchRequest setPredicate: [NSPredicate predicateWithFormat: @"(tweetIDstr IN %@)", idArray]];
+        [Tweet truncateAllInContext:context];
         
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"tweetIDstr" ascending:YES];
-        NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-        [fetchRequest setSortDescriptors:sortDescriptors];
-        [sortDescriptor release];
-        [sortDescriptors release];
-        
-        NSError *error = nil;
-        NSArray *storedTweets = [context executeFetchRequest:fetchRequest error:&error];
-        [fetchRequest release];
+        NSArray *storedTweets = [Tweet findAllSortedBy:@"tweetIDstr" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"(tweetIDstr IN %@)", idArray] inContext:context];
         
         NSMutableSet *storedTweetIDs = [[NSMutableSet alloc] init];
         for (id tweet in storedTweets){
